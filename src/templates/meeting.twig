@@ -1,0 +1,125 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Zoom plugin for Craft CMS 3.x
+ *
+ * Zoom index.twig
+ *
+ * @author    Fatfish
+ * @copyright Copyright (c) 2020 Fatfish
+ * @link      www.fatfish.com.au
+ * @package   Zoom
+ * @since     1.0.0
+ */
+#}
+
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+{% do view.registerAssetBundle("fatfish\\zoom\\assetbundles\\zoom\\ZoomAsset") %}
+{% set title ='Host Meeting' %}
+
+
+{% set content %}
+    {%  set id=null %}
+    {%  set type=null %}
+    {%  set topic=null %}
+    {%  set host=null %}
+    {%  set meetingtime=null %}
+    {%  set meetingduration=null %}
+    {%  set agenda=null %}
+    {%  set timezone=null %}
+
+    {% if meetingdata is defined %}
+
+        {%  set id=meetingdata.id %}
+        {%  set type=meetingdata.type %}
+        {%  set topic=meetingdata.topic %}
+        {%  set host=meetingdata.host %}
+        {%  set meetingtime=meetingdata.start_time %}
+        {%  set meetingduration=meetingdata.duration %}
+        {%  set agenda=meetingdata.agenda %}
+        {%  set timezone=meetingdata.timezone %}
+    {% endif %}
+    <form method="post" accept-charset="" action="{{ url('/admin/create') }}" >
+        <input type="hidden" name="meetingid" id="meetingid" value="{{ id | default('') }}">
+        {{ csrfInput() }}
+        {{ redirectInput('') }}
+
+        {{
+            forms.textField({
+                label:'Meeting Topic',
+                name:'topic',
+                id:'topic',
+                required:'required',
+                size:50,
+                value:topic
+            })
+        }}
+
+        {{
+            forms.selectField({
+                label:'Meeting Type',
+                name:'type',
+                id:'type',
+                options:meetingType,
+                value:type | default(1)
+            })
+        }}
+        {{ forms.selectField({
+            label:'Meeting Host',
+            id:'userid',
+            name:'userid',
+            options:user,
+            value:host | default('')
+        }) }}
+
+    {{
+        forms.datetimeField({
+            label:'Meeting Start Time',
+            id:'start_time',
+            name:'start_time',
+            required:true,
+            value :timezone|datetime('short') | default('')
+
+        })
+    }}
+
+        {{
+            forms.selectField({
+                label:'Timezone',
+                id:'timezone',
+                name:'timezone',
+                options:timezones,
+                value:timezone | default('please select')
+            })
+        }}
+
+        {{
+            forms.textField({
+                label:'Duration',
+                id:'duration',
+                name:'duration',
+                instructions:'Please enter meeting duration in minutes',
+                size:50,
+                value:meetingduration | default('45'),
+                required:true,
+            })
+        }}
+
+    {{
+        forms.textareaField({
+
+            label:'Meeting Agenda',
+            name:'agenda',
+            id:'agenda',
+            rows:3,
+            columns:3,
+            size:50,
+            value:agenda | default('')
+
+        })
+    }}
+<input type="submit" value="submit" class="btn btngroup">
+    </form>
+
+{% endset %}

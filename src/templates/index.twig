@@ -1,0 +1,115 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Zoom plugin for Craft CMS 3.x
+ *
+ * Zoom index.twig
+ *
+ * @author    Fatfish
+ * @copyright Copyright (c) 2020 Fatfish
+ * @link      www.fatfish.com.au
+ * @package   Zoom
+ * @since     1.0.0
+ */
+#}
+
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("fatfish\\zoom\\assetbundles\\zoom\\ZoomAsset") %}
+{% do view.registerAssetBundle("fatfish\\zoom\\assetbundles\\indexcpsection\\IndexCPSectionAsset") %}
+
+{% set docsUrl = "???" %}
+
+{% set title = "Zoom" %}
+
+{% set pluginCpUrl = url('zoom') %}
+
+{% set iconUrl = view.getAssetManager().getPublishedUrl('@fatfish/zoom/assetbundles/indexcpsection/dist', true) ~ '/img/Index-icon.svg' %}
+
+{% set extraPageHeaderHtml %}
+    <div class="buttons">
+        <a href="{{ pluginCpUrl }}" class="btn submit add icon">{{ "Click Me!"|t('zoom') }}</a>
+    </div>
+{% endset %}
+
+{% set content %}
+
+
+    <div id="action-button">
+        <div class="btn submit"  style="position: relative; overflow: hidden;" role="button">
+            <a href="/admin/meeting" style="color: white"> Host Meeting</a>
+        </div>
+    </div>
+<br>
+
+    {% set meetings=craft.zoom.list_meetings() %}
+
+        <div id="content-container">
+
+            <div id="content" class="content-pane">
+                <div class="main">
+                    <div class="elements">
+                        <div class="tableview tablepane">
+                            <table class="data fullwidth">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Meeting Id</th>
+                                    <th scope="col">Topic</th>
+                                    <th scope="col">start_time</th>
+                                    <th scope="col">duration</th>
+                                    <th scope="col">agenda</th>
+                                    <th scope="col">Start Meeting</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% if meetings is not null %}
+
+                                    {% for meeting in meetings.meetings %}
+
+                                       <tr>
+                                           <td>{{ meeting.id }}</td>
+                                           <td>{{ meeting.topic }}</td>
+                                           <td>{{ meeting.start_time|datetime('short') }}</td>
+                                           <td>{{ meeting.duration }}</td>
+                                           <td>{{ meeting.agenda }}</td>
+                                           <td>
+                                               <div class="btn submit"  style="position: relative; overflow: hidden;" role="button">
+                                                   <a href="https://zoom.us/s/{{ meeting.id }}" style="color: white" target="_blank"> Start</a>
+                                               </div>
+                                           </td>
+                                           <td>
+                                               <div class="btn submit"  style="position: relative; overflow: hidden;" role="button">
+                                                   <a href="update/{{ meeting.id}}" style="color: white"> edit</a>
+                                               </div>
+                                           </td>
+                                           <td>
+                                               <div class="btn submit"  style="position: relative; overflow: hidden;" role="button">
+                                                   <a href="#" style="color: white" data-id="{{ meeting.id }}" class="deletemeeting"> Delete</a>
+                                               </div>
+                                           </td>
+
+                                       </tr>
+
+                                    {% endfor %}
+
+
+                                {% endif %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    {% endset %}

@@ -1,0 +1,12 @@
+<div class="{{ wrapper_class }} js-{{ wrapper_class }}">
+    <div class="select">
+        <select class="{{ wrapper_class }} js-{{ wrapper_class }}__{{ name }}" name="{{ name }}[]" >
+
+            {% for id,name in options %}
+            <option value="{{ id }}">{{ name}}</option>
+
+{% endfor %}
+        </select>
+    </div>
+</div>
+

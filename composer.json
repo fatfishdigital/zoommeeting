@@ -1,0 +1,42 @@
+{
+    "name": "fatfish/zoom",
+    "description": "Video Conferencing plugin for zoom",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "zoom"
+    ],
+    "support": {
+        "docs": "???",
+        "issues": "???"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fatfish",
+            "homepage": "www.fatfish.com.au"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1",
+        "firebase/php-jwt": "*"
+    },
+    "autoload": {
+        "psr-4": {
+          "fatfish\\zoom\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Zoom",
+        "handle": "zoom",
+        "developer": "Fatfish",
+        "developerUrl": "www.fatfish.com.au",
+        "documentationUrl": "???",
+        "changelogUrl": "???",
+        "class": "fatfish\\zoom\\Zoom"
+    }
+}

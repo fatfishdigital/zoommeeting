@@ -1,0 +1,46 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Zoom plugin for Craft CMS 3.x
+ *
+ * Zoom Settings.twig
+ *
+ * @author    Fatfish
+ * @copyright Copyright (c) 2020 Fatfish
+ * @link      www.fatfish.com.au
+ * @package   Zoom
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("fatfish\\zoom\\assetbundles\\zoom\\ZoomAsset") %}
+
+{{ forms.textField({
+    label: 'Api Key',
+    instructions: 'Enter your zoom api key',
+    id: 'Apikey',
+    name: 'Apikey',
+    value: settings['Apikey'],
+    required:true
+
+})
+}}
+{{ forms.textField({
+    label: 'Api Secret',
+    instructions: 'Enter your zoom api Secret',
+    id: 'ApiSecret',
+    name: 'ApiSecret',
+    value: settings['ApiSecret'],
+    required:true
+})
+}}
+{{ forms.textField({
+    label: 'IM Chat History Token',
+    instructions: 'Enter your IM Chat History Token ',
+    id: 'HistoryToken',
+    name: 'HistoryToken',
+    value: settings['HistoryToken'],
+    required:true})
+}}

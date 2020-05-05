@@ -1,0 +1,35 @@
+{% extends "_layouts/cp" %}
+{% set title="Instant Zoom Meeting" %}
+{% set content %}
+
+    <div class="content">
+
+        <div class="tableview tablepane">
+            <table class="data fullwidth">
+                <thead>
+                <tr>
+                    <th scope="col">Meeting Id</th>
+                    <th scope="col">Topic</th>
+                    <th scope="col">agenda</th>
+                    <th scope="col">start meeting</th>
+                    <th scope="col">join meeting</th>
+                    <th scope="col">Meeting Password</th>
+                    <th scope="col">status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ instantmeeting.id }}</td>
+                    <td>{{ instantmeeting.topic }}</td>
+                    <td>{{ instantmeeting.agenda }}</td>
+                    <td><a href="{{ instantmeeting.start_url }}">start Meeting</a></td>
+                    <td><a href=" {{ instantmeeting.join_url }}">Join Meeting</a></td>
+                    <td>{{ instantmeeting.password }}</td>
+                    <td>{{ instantmeeting.status }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endset %}

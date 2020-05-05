@@ -1,0 +1,67 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+{% set title="Add user" %}
+
+{% set content %}
+
+
+    <form method="post" action="/admin/user/saveuser">
+    {{ csrfInput() }}
+
+        {{ forms.textField({
+
+            label:'First Name',
+            id:'first_name',
+            name:'first_name',
+            size:50,
+            required:true,
+        })
+
+        }}
+
+        {{
+        forms.textField({
+
+            label:'Last Name',
+            id:'last_name',
+            name:'last_name',
+            size:50,
+            required:true
+
+        })
+        }}
+
+        {{ forms.textField({
+
+            label:"Email",
+            id:"email",
+            name:"email",
+            type:"email",
+            size:50,
+            required:true
+
+        }) }}
+        {{ forms.textField({
+
+            label:"Password",
+            id:"password",
+            name:"password",
+            type:"password",
+            size:50,
+            required:true
+
+        }) }}
+
+        {{ forms.selectField({
+            label:'User type',
+            id:'usertype',
+            name:'usertype',
+            options:usertype,
+            required:true,
+        }) }}
+        <input class="btn submit" type="submit" name="submit" value="submit"/>
+    </form>
+
+
+
+{% endset %}

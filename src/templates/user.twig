@@ -1,0 +1,109 @@
+{% extends '_layouts/cp' %}
+{% set title="Zoom users" %}
+{% do view.registerAssetBundle("fatfish\\zoom\\assetbundles\\zoom\\ZoomAsset") %}
+{% set content %}
+
+    <div id="action-button">
+        <div class="btngroup submit">
+            <a class="btn submit add icon" href="{{ url('/admin/zoom/user/add') }}">New User</a>
+        </div>
+    </div>
+    <br>
+<div id="content-container">
+
+    <div id="content" class="content-pane">
+        <div class="main">
+            <div class="elements">
+                <div class="tableview tablepane">
+                    <table class="data fullwidth">
+
+                        <thead>
+                        <tr>
+                            <th scope="col">FirstName</th>
+                            <th scope="col">LastName</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for user in users %}
+                            <tr>
+                                <td class="firstname">{{ user.first_name }}</td>
+                                <td class="lastname">{{ user.last_name }}</td>
+                                <td class="email">{{ user.email }}</td>
+                                <td>{{ user.status }}</td>
+                                 <td>
+                                     <a class="btn submit edit icon" href="#" id="edituser" data-id="{{ user.id }}" data-firstname="{{ user.first_name }}" data-lastname="{{ user.last_name }}" data-email="{{ user.email }}">Edit</a>
+                                     <a class="btn submit delete icon" href="#" id="deleteuser" data-userid="{{ user.id }}">Delete</a>
+                                 </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+
+                </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script id="edituserdialog" type="text/template">
+        <div class="body">
+            <div class="field" id="firstname">
+                <div class="heading">
+                    <label class="required" for="name">First Name</label>
+                </div>
+                <div class="input ltr">
+                    <input class="text" type="text" id="first_name" autocomplete="off" required>
+                </div>
+            </div>
+            <div class="field" id="lastname">
+                <div class="heading">
+                    <label class="required" for="name">Last Name</label>
+                </div>
+                <div class="input ltr">
+                    <input class="text" type="text" id="last_name" autocomplete="off" required>
+                </div>
+            </div>
+            <div class="field" id="email">
+                <div class="heading">
+                    <label class="required" for="name">Email</label>
+                </div>
+                <div class="input ltr">
+                    <input class="text" type="email" id="emailaddress" autocomplete="off" required>
+                </div>
+            </div>
+
+            <div class="field" id="firstname">
+                <div class="heading">
+                    <label class="required" for="name">User Type</label>
+                </div>
+                <div class="input ltr">
+                    <div class="select">
+                        <select id="usertype" name="usertype">
+                            <option value="1">Basic</option>
+                            <option value="2">Licensed</option>
+                            <option value="3">On-prem</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <footer class="footer">
+            <div class="buttons right">
+                <input type="button" class="btn submit" value="{{ 'Cancel'|t('app') }}" id="exit">
+                    <input type="submit" class="btn submit" value="{{ 'update'|t('app') }}" id="UpdateBtn">
+            </div>
+        </footer>
+    </script>
+
+{% endset %}
