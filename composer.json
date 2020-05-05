@@ -2,7 +2,7 @@
     "name": "fatfish/zoom",
     "description": "Zoom Video Conferencing plugin for Craft Cms",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "v1.0.0",
     "keywords": [
         "craft",
         "cms",
