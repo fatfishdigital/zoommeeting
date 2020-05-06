@@ -2,7 +2,7 @@
 
 Zoom Video Conferencing plugin for Craft CMS
 
-![Screenshot](resources/img/zoom.png)
+![Screenshot](resources/img/plugnizoom.png)
 
 
 ## Requirements
