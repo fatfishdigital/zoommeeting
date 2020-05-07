@@ -30,6 +30,15 @@
             $this->ApiKey=$settings->Apikey;
             $this->ApiSecret=$settings->ApiSecret;
             $this->HistoryToken=$settings->HistoryToken;
+
+            if(empty($this->ApiKey) || empty($this->ApiSecret) || empty($this->HistoryToken))
+            {
+                Craft::$app->session->setNotice("Please configure plugins setting first");
+                return;
+
+            }
+
+
             $payload=[
                     "aud"=> null,
                     "iss"=> $this->ApiKey,
@@ -41,6 +50,11 @@
 
         public function send_request($url,$method,$body=null)
         {
+            if(is_null($this->_JWT_Token) || empty($this->_JWT_Token))
+            {
+                 Craft::$app->session->setNotice("Please configure plugins setting first");
+                 return;
+            }
             $client= new Client();
             $header=['Authorization'=>'Bearer '.$this->_JWT_Token];
             $result='';
@@ -53,18 +67,14 @@
 
                 $Message = json_decode($ex->getResponse()->getBody());
                 $errormessage = new ZoomError();
-                if($Message->code==124)
-                {
-                  $this->create_token($this->ApiKey,$this->ApiSecret);
-                  $this->send_request($url,$method);
-                  return;
-                }
                 if($ex->getCode()==400)
                 {
                     return ($Message->message);
                 }
-               if($ex->getCode())
-
+                if($ex->getCode()==124)
+                {
+                    return $ex->getMessage();
+                }
                 return ($ex->getMessage());
             }
             if($result->getStatusCode()==204){

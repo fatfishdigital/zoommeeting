@@ -2,6 +2,7 @@
 
     namespace fatfish\zoom\variables;
 
+    use Composer\Package\Loader\ValidatingArrayLoader;
     use fatfish\zoom\Zoom;
     use Craft;
     class zoomvariable {
@@ -13,6 +14,14 @@
          */
         public function list_meetings()
         {
+            $settings = Zoom::$plugin->getSettings();
+            if(empty($settings->Apikey) || empty($settings->ApiSecret) || empty($settings->HistoryToken))
+            {
+                Craft::$app->session->setNotice("Configure the plugins settings page with API");
+                return;
+            }
+
+
           return  Zoom::$plugin->zoomeeting->list_meetings();
         }
 

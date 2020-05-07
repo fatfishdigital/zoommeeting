@@ -21,7 +21,13 @@
         private $_allUsers;
 
         public function init(){
+
+
             $users=Zoom::$plugin->zoomuser->list_all_users();
+            if(is_null($users) || empty($users))
+            {
+                return;
+            }
             $this->_allUsers=$users->users;
         }
 

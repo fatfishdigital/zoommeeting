@@ -18,6 +18,12 @@
         {
 
             $users=Zoom::$plugin->zoomservice->send_request($this->_Users,'GET');
+            if(is_null($users) || empty($users))
+            {
+                Craft::$app->session->setError("Something Went Wrong");
+                return;
+            }
+
             foreach ($users->users as $user):
                 $this->_ListUsers[$user->id]=$user->first_name.' '.$user->last_name;
                 endforeach;
