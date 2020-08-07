@@ -41,9 +41,9 @@ class Settings extends Model
     public function rules()
     {
         return [
-            ['Apikey', 'string','required'],
-            ['ApiSecret', 'string','required'],
-            ['HistoryToken', 'string','required'],
+            ['Apikey', 'string'],
+            ['ApiSecret', 'string'],
+            ['HistoryToken', 'string'],
 
 
         ];
