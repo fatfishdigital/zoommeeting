@@ -23,17 +23,18 @@
         public function init(){
 
 
+            parent::init();
             $users=Zoom::$plugin->zoomuser->list_all_users();
             if(is_null($users) || empty($users))
             {
                 return;
             }
             $this->_allUsers=$users->users;
+
         }
 
         public function actionIndex()
         {
-
                 $this->renderTemplate('zoom/user',['users'=>$this->_allUsers]);
         }
 

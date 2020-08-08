@@ -62,27 +62,15 @@
 
                 $result=$client->request($method,$url,['headers'=>$header,'json'=>$body]);
             }
-            catch (ClientException $ex)
+            catch (\Exception $ex)
             {
-
-                $Message = json_decode($ex->getResponse()->getBody());
-                $errormessage = new ZoomError();
-                if($ex->getCode()==400)
-                {
-                    return ($Message->message);
-                }
-                if($ex->getCode()==124)
-                {
-                    return $ex->getMessage();
-                }
-                return ($ex->getMessage());
+                throw $ex;
             }
             if($result->getStatusCode()==204){
 
                 return true; //successfully deleted meetings or updated.
 
             }
-
             return json_decode($result->getBody()->getContents());
         }
 

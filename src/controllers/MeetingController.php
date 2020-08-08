@@ -46,6 +46,7 @@
 
         public function init()
         {
+            parent::init();
             $all_timezone=[];
             $this->_users=Zoom::$plugin->zoomuser->get_users();
             $timezone= \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
@@ -58,6 +59,7 @@
 
         public function actionIndex()
         {
+
                return $this->renderTemplate('zoom/meeting',['user'=>$this->_users,'meetingType'=>$this->_meetingType,'timezones'=>$this->_timezones,
                        'recurrance'=>$this->_recurrance,'repeat'=>$this->_repeat_interval]);
         }
@@ -66,6 +68,7 @@
 
         public function actionCreateMeeting()
         {
+
             $request = Craft::$app->getRequest();
             Zoom::$plugin->zoomeeting->set_meeting_data($request);
             $meetingcreated=Zoom::$plugin->zoomeeting->create_meeting();
