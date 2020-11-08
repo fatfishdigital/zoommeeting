@@ -11,7 +11,7 @@
     class MeetingController extends Controller {
 
 
-
+        public static  $plugin;
         private $_meetingType=[
                 '1'=>'Instant Meeting',
                 '2'=>'Scheduled Meeting',
@@ -109,14 +109,13 @@
 
         public function actionUpdateMeeting($id)
         {
-
                 $Meeting=new \stdClass();
                 $meetingDetail=Zoom::$plugin->zoomeeting->get_meeting_details($id);
                 $Meeting->id=$meetingDetail->id;
-                $Meeting->topic=$meetingDetail->topic;
+                $Meeting->topic=property_exists($meetingDetail,'topic') ? $meetingDetail->topic:null;
                 $Meeting->type=$meetingDetail->type;
                 $Meeting->start_time=$meetingDetail->start_time;
-                $Meeting->agenda=$meetingDetail->agenda;
+                $Meeting->agenda=property_exists($meetingDetail,'agenda') ? $meetingDetail->agenda : null;
                 $Meeting->timezone=$meetingDetail->timezone;
                 $Meeting->host=$meetingDetail->host_id;
                 $Meeting->duration=$meetingDetail->duration;

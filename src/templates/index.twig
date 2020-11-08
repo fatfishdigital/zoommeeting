@@ -18,9 +18,8 @@
 
 {% do view.registerAssetBundle("fatfish\\zoom\\assetbundles\\zoom\\ZoomAsset") %}
 {% do view.registerAssetBundle("fatfish\\zoom\\assetbundles\\indexcpsection\\IndexCPSectionAsset") %}
-
 {% set docsUrl = "???" %}
-
+{% set cpurl =     cpUrl() %}
 {% set title = "Zoom" %}
 
 {% set pluginCpUrl = url('zoom') %}
@@ -41,7 +40,7 @@
     {% set meetings=craft.zoom.list_meetings() %}
     <div id="action-button">
         <div class="btn submit"  style="position: relative; overflow: hidden;" role="button">
-            <a href="/admin/meeting" style="color: white"> Host Meeting</a>
+            <a href="{{ cpurl }}/meeting" style="color: white"> Host Meeting</a>
         </div>
     </div>
     <br>
@@ -70,27 +69,62 @@
 
                                 {% if meetings is not null %}
 
+                                    {% set id=null %}
+                                    {% set topic=null %}
+                                    {% set start_time=null %}
+                                    {% set duration=null %}
+                                    {% set agenda=null %}
+
                                     {% for meeting in meetings.meetings %}
 
+                                        {% if meeting.id is defined  %}
+
+                                          {% set id=meeting.id %}
+
+                                            {% endif %}
+                                    {% if meeting.topic is defined  %}
+
+                                       {% set topic=meeting.topic %}
+
+                                    {% endif %}
+
+                                    {% if meeting.start_time is defined  %}
+
+                                        {% set  start_time=meeting.start_time %}
+
+                                    {% endif %}
+
+                                    {% if meeting.duration is defined %}
+
+                                        {% set duration = meeting.duration  %}
+
+                                        {% endif %}
+
+                                    {% if meeting.agenda is defined %}
+
+                                       {% set agenda=meeting.agenda %}
+
+                                        {% endif %}
+
                                        <tr>
-                                           <td>{{ meeting.id }}</td>
-                                           <td>{{ meeting.topic }}</td>
-                                           <td>{{ meeting.start_time|datetime('short') }}</td>
-                                           <td>{{ meeting.duration }}</td>
-                                           <td>{{ meeting.agenda }}</td>
+                                           <td>{{ id }}</td>
+                                           <td>{{ topic }}</td>
+                                           <td>{{ start_time|datetime('short') }}</td>
+                                           <td>{{ duration }}</td>
+                                           <td>{{ agenda }}</td>
                                            <td>
                                                <div class="btn submit"  style="position: relative; overflow: hidden;" role="button">
-                                                   <a href="https://zoom.us/s/{{ meeting.id }}" style="color: white" target="_blank"> Start</a>
+                                                   <a href="https://zoom.us/s/{{ id }}" style="color: white" target="_blank"> Start</a>
                                                </div>
                                            </td>
                                            <td>
                                                <div class="btn submit"  style="position: relative; overflow: hidden;" role="button">
-                                                   <a href="update/{{ meeting.id}}" style="color: white"> edit</a>
+                                                   <a href="update/{{ id}}" style="color: white"> edit</a>
                                                </div>
                                            </td>
                                            <td>
                                                <div class="btn submit"  style="position: relative; overflow: hidden;" role="button">
-                                                   <a href="#" style="color: white" data-id="{{ meeting.id }}" class="deletemeeting"> Delete</a>
+                                                   <a href="#" style="color: white" data-id="{{ id }}" class="deletemeeting"> Delete</a>
                                                </div>
                                            </td>
 

@@ -1,11 +1,12 @@
 {% extends '_layouts/cp' %}
 {% set title="Zoom users" %}
 {% do view.registerAssetBundle("fatfish\\zoom\\assetbundles\\zoom\\ZoomAsset") %}
+{% set cpurl = cpUrl() %}
 {% set content %}
 
     <div id="action-button">
         <div class="btngroup submit">
-            <a class="btn submit add icon" href="{{ url('/admin/zoom/user/add') }}">New User</a>
+            <a class="btn submit add icon" href="{{ cpurl }}/zoom/user/add">New User</a>
         </div>
     </div>
     <br>

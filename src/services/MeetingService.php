@@ -71,10 +71,10 @@
                 $this->_meetingId=$request->getRequiredParam('meetingid');
             }
         $this->_topic=$request->getRequiredParam('topic');
-        $this->_type=$request->getRequiredParam('type');;
-        $this->_userid=$request->getRequiredParam('userid');;
-        $this->_start_time=$request->getRequiredParam('start_time');;
-        $this->_agenda=$request->getRequiredParam('agenda');;
+        $this->_type=$request->getRequiredParam('type');
+        $this->_userid=$request->getRequiredParam('userid');
+        $this->_start_time=$request->getRequiredParam('start_time');
+        $this->_agenda=$request->getRequiredParam('agenda');
         $this->_timezone=$request->getRequiredParam('timezone');
             if (!is_null($request->getRequiredParam('duration')))
             {

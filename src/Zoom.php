@@ -10,7 +10,9 @@
 
 namespace fatfish\zoom;
 use craft\events\RegisterComponentTypesEvent;
+use craft\events\RegisterCpNavItemsEvent;
 use craft\services\Fields;
+use craft\web\twig\variables\Cp;
 use craft\web\twig\variables\CraftVariable;
 use fatfish\zoom\fieldtypes\zoomfield as zoomfieldAlias;
 use fatfish\zoom\models\Settings;
